@@ -2,11 +2,24 @@
 
 <html>
 
-	<head><title> PONG </title></head>
+	<head>
+    <title> PONG </title>
+    <style>
+      kbd{
+        padding: 2px;
+        background:white;
+        color:black;
+        border:2px solid black;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
 
 	<body style="background:rgb(20,20,20)">
+
+    <h3 style="color:white; text-align:center; line-height:1.6em">use <kbd>W</kbd><kbd>S</kbd> to move up and down the Pad of the Player1, press <kbd>ENTER</kbd> to Player2<br>use <kbd>↑</kbd><kbd>↓</kbd> to move up and down the Pad of the Player2</h3>
 		
-		<div style = "width:100%;text-align:center">
+		<div style="width:600px; margin:auto; box-shadow:0px 0px 15px white">
 			<canvas id="pong" width="600" height="500"></canvas>
 		</div>
 		
@@ -168,8 +181,34 @@
 				ball.y += ball.direY
 				
 				//Game over rules
-				if(ball.x+11<0 || ball.x-11>600){
-					console.log("GAME OVER");
+				if(ball.x-11>600){
+					console.log("Player1 won");
+          cc.fillStyle = "red";
+          cc.font = "bold 46px Arial";
+          cc.textAlign = 'center';
+          cc.fillText("Player1 won", 300, 250);
+          cc.strokeStyle = "black";
+          cc.strokeText("Player1 won", 300, 250);
+          cc.fillStyle = "red";
+          cc.font = "30px Arial";
+          cc.fillText("Reload the page to restart", 300, 280);
+          cc.strokeStyle = "black";
+          cc.strokeText("Reload the page to restart", 300, 280);
+					p = 2;
+				}
+        if(ball.x+11<0){
+					console.log("Player2 won");
+          cc.fillStyle = "red";
+          cc.font = "bold 46px Arial";
+          cc.textAlign = 'center';
+          cc.fillText("Player2 won", 300, 250);
+          cc.strokeStyle = "black";
+          cc.strokeText("Player2 won", 300, 250);
+          cc.fillStyle = "red";
+          cc.font = "30px Arial";
+          cc.fillText("Reload the page to restart", 300, 280);
+          cc.strokeStyle = "black";
+          cc.strokeText("Reload the page to restart", 300, 280);
 					p = 2;
 				}
 				

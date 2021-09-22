@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head><title> PONG </title></head>
+
+	<body style="background:rgb(20,20,20)">
+		
+		<div style = "width:100%;text-align:center">
+			<canvas id="pong" width="600" height="500"></canvas>
+		</div>
+		
+		<script>
+			//Starting settings
+			canvas = document.getElementById("pong");
+			cc = canvas.getContext("2d");
+			window.onkeydown = kd;
+			window.onkeyup = ku;
+			
+			//CPU difficulty. 0=normal, 1=impossible, 2=zen
+			let d=0;
+			
+			//Time
+			var t=1;
+			
+			//Pause var
+			var p=0;
+			
+			//There Is A Player 2 var
+			var tiap2=0;
+			
+			//Velocity var
+			let v=30;
+			
+			//Update interval
+			var interval = setInterval(update , 1000/v);
+			
+			//Update frame
+			function update(){
+				if(p!=2){
+					system();
+				}
+			}
+			
+			//create ball
+			let ball;
+			ball = {
+				x:300,
+				y:250,
+				direX:Math.round(Math.random())? Math.round((Math.random()+2)*10)/10:-Math.round((Math.random()+2)*10)/10,
+				direY:Math.round(Math.random())? Math.round((Math.random()*3)*10)/10:-Math.round((Math.random()*3)*10)/10
+			}
+			
+			console.log(ball.direX);
+			console.log(ball.direY);
+			 
+			//bars position
+			let bar1 = 185;
+			let bar2 = 185;
+			
+			//players
+			let p1;
+			let p2;
+			
+			function system(){
+				//Background
+				cc.fillStyle = "black";
+				cc.fillRect(0,0,canvas.width,canvas.height);
+				cc.beginPath();
+				cc.strokeStyle = "white";
+				cc.moveTo(0,0);
+				cc.lineTo(600,0);
+				cc.moveTo(0,500);
+				cc.lineTo(600,500);
+				cc.stroke();
+				cc.closePath()
+				t += 1/v;
+				
+				//circle
+				cc.fillStyle = "white";
+				cc.arc(ball.x,ball.y,10,0,Math.PI*2);
+				cc.fill();
+				
+				//bars
+				cc.fillRect(0,bar1,15,130);
+				if(d!=2 || tiap2!=0){
+					cc.fillRect(600,bar2,-15,130);
+				}
+				
+				//CPU
+				if(d==0 && tiap2==0){
+					if(ball.direX<0){
+						if(Math.round(bar2)>186)p2="up";
+						if(Math.round(bar2)<184)p2="down";
+						if(Math.round(bar2)>=184 && Math.round(bar2)<=186)p2="stop";
+					}else{
+						if(ball.x>316+(Math.abs(ball.direY))*v/2/Math.abs(ball.direX)){
+							if(ball.y<Math.round(bar2)+40)p2="up";
+							if(ball.y>Math.round(bar2)+70)p2="down";
+							if(ball.y>Math.round(bar2)+40 && ball.y<Math.round(bar2)+70)p2="stop";
+						}
+					}
+				}
+				if(d==1 && tiap2==0){
+				bar2 = ball.y-65;
+				}
+				
+				//move bars
+				if(p1 == "up" && bar1 >= 0) bar1 -= 5*30/v;
+				if(p1 == "down" && bar1 <= 370) bar1 += 5*30/v;
+				if(p2 == "up" && bar2 >= 0) bar2 -= 5*30/v;
+				if(p2 == "down" && bar2 <= 370)bar2 += 5*30/v;
+				
+				//reflect ball
+				if(ball.y-10<=0) ball.direY = Math.abs(ball.direY);
+				if(ball.y+10>=500) ball.direY = -Math.abs(ball.direY);
+				if(d==2){
+					if(ball.x-10<=0) ball.direX = Math.abs(ball.direY);
+					if(ball.x+10>=600) ball.direX = -Math.abs(ball.direX);
+				}
+				
+				if(ball.x-10<=15 && ball.x-10>=10 && ball.y>=bar1+35 && ball.y<=bar1+95){
+					ball.direX = Math.abs(ball.direX);
+				}else{
+				
+					if(ball.x-10<=15 && ball.x-10>=10 && ball.y>=bar1 && ball.y<=bar1+35){
+						ball.direX = Math.abs(ball.direX);
+						ball.direY -= 0.5;
+						ball.direY = Math.round(ball.direY * 10) / 10;
+					}
+				
+					if(ball.x-10<=15 && ball.x-10>=10 && ball.y>=bar1+95 && ball.y<=bar1+130){
+						ball.direX = Math.abs(ball.direX);
+						ball.direY += 0.5;
+						ball.direY = Math.round(ball.direY * 10) / 10;
+					}
+				
+				}
+				
+				if(ball.x+10>=585 && ball.x+10<=590 && ball.y>=bar2+35 && ball.y<=bar2+95){
+					ball.direX = -Math.abs(ball.direX);
+				}else{
+				
+					if(ball.x+10>=585 && ball.x+10<=590 && ball.y>=bar2 && ball.y<=bar2+35){
+						ball.direX = -Math.abs(ball.direX);
+						ball.direY -= 0.5;
+						ball.direY = Math.round(ball.direY * 10) / 10;
+					}
+				
+					if(ball.x+10>=585 && ball.x+10<=590 && ball.y>=bar2+95 && ball.y<=bar2+130){
+						ball.direX = -Math.abs(ball.direX);
+						ball.direY += 0.5;
+						ball.direY = Math.round(ball.direY * 10) / 10;
+					}
+				
+				}
+
+				//Speed up ball
+				if(Math.abs(ball.direX*v)<80 && Math.floor(t%4) == 0){
+						t+=1;
+						v += 2;
+						clearInterval(interval);
+						interval = setInterval(update , 1000/v);		
+				}
+				
+				//move ball
+				ball.x += ball.direX
+				ball.y += ball.direY
+				
+				//Game over rules
+				if(ball.x+11<0 || ball.x-11>600){
+					console.log("GAME OVER");
+					p = 2;
+				}
+				
+			}
+		
+			//Get keydown inputs
+			function kd(ev){
+				//Get arrows inputs
+				if(ev.type ==  "keydown" && !ev.repeat){
+					
+					if(ev.keyCode ==  38 && p != 2 && p2 != "down" && tiap2 == 1){
+						console.log("P2 UP");
+						p2 = "up";
+					}
+					
+					if(ev.keyCode ==  87 && p != 2 && p1 != "down"){
+						console.log("P1 UP");
+						p1 = "up";
+					}
+		
+					if(ev.keyCode ==  40 && p != 2 && p2 != "up" && tiap2 == 1){
+						console.log("P2 DOWN");
+						p2 = "down";
+					}
+					
+					if(ev.keyCode ==  83 && p != 2 && p1 != "up"){
+						console.log("P1 DOWN");
+						p1 = "down";
+					}
+					
+					if(ev.keyCode ==  13 && p != 2){
+						console.log("P2 on");
+						p2 = "stop";
+						tiap2 = 1;
+					}
+			
+					if(ev.keyCode == 80 && p == 0){
+						console.log("PAUSE");
+						p = 1;
+						clearInterval(interval);
+					}else if(ev.keyCode == 80 && p != 2){
+						console.log("PLAY");
+						p = 0;
+						interval = setInterval(update , 1000/v);
+					}
+			
+				}
+
+			}
+			
+			//Get keyup inputs
+			function ku(ev){
+		
+				//Get arrows inputs
+				if(ev.type ==  "keyup"){
+					
+					if(ev.keyCode ==  38 && p != 2 && p2 != "down" && tiap2 == 1){
+						console.log("P2 STOP UP");
+						p2 = "stop";
+					}
+					
+					if(ev.keyCode ==  87 && p != 2 && p1 != "down"){
+						console.log("P1 STOP UP");
+						p1 = "stop";
+					}
+		
+					if(ev.keyCode ==  40 && p != 2 && p2 != "up" && tiap2 == 1){
+						console.log("P2 STOP DOWN");
+						p2 = "stop";
+					}
+					
+					if(ev.keyCode ==  83 && p != 2 && p1 != "up"){
+						console.log("P1 STOP DOWN");
+						p1 = "stop";
+					}
+			
+				}
+
+			}
+		
+		</script>
+		
+	</body>
+
+</html>

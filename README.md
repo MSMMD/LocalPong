@@ -1,6 +1,4 @@
 <div align="center">
-  <a href="https://replit.com/@MSMMD"><img src="https://img.shields.io/static/v1?label=Replit&message=MsMmD&color=blue&style=for-the-badge&logo=replit&logoColor=white"></a>
-  <a href="https://localpong.msmmd.repl.co"><img src="https://img.shields.io/static/v1?label=LocalPong&message=play&color=yellow&style=for-the-badge"></a>
   <img src="https://img.shields.io/github/watchers/MSMMD/LocalPong?color=orange&label=Views&style=for-the-badge">
   <img src="https://img.shields.io/github/stars/MSMMD/LocalPong?label=Stars&style=for-the-badge&color=fafd10">
   <img src="https://img.shields.io/github/forks/MSMMD/LocalPong?color=white&label=Forks&style=for-the-badge">

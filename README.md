@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https:/msmmd.github.io/LocalPong"><img src="https://img.shields.io/static/v1?label=LocalPong&message=play&color=yellow&style=for-the-badge"></a>
+  <a href="https://msmmd.github.io/LocalPong"><img src="https://img.shields.io/static/v1?label=LocalPong&message=play&color=yellow&style=for-the-badge"></a>
   <img src="https://img.shields.io/github/watchers/MSMMD/LocalPong?color=orange&label=Views&style=for-the-badge">
   <img src="https://img.shields.io/github/stars/MSMMD/LocalPong?label=Stars&style=for-the-badge&color=fafd10">
   <img src="https://img.shields.io/github/forks/MSMMD/LocalPong?color=white&label=Forks&style=for-the-badge">

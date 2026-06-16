@@ -1,10 +1,10 @@
 <div align="center">
   <a href="https://msmmd.github.io/LocalPong"><img src="https://img.shields.io/static/v1?label=LocalPong&message=play&color=yellow&style=for-the-badge"></a>
-  <img src="https://img.shields.io/github/watchers/MSMMD/LocalPong?color=orange&label=Views&style=for-the-badge">
-  <img src="https://img.shields.io/github/stars/MSMMD/LocalPong?label=Stars&style=for-the-badge&color=fafd10">
-  <img src="https://img.shields.io/github/forks/MSMMD/LocalPong?color=white&label=Forks&style=for-the-badge">
+  <img src="https://img.shields.io/github/watchers/MSMMD/LocalPong?color=orange&label=Views&style=for-the-badge&version=1">
+  <img src="https://img.shields.io/github/stars/MSMMD/LocalPong?label=Stars&style=for-the-badge&color=fafd10&version=2">
+  <img src="https://img.shields.io/github/forks/MSMMD/LocalPong?color=white&label=Forks&style=for-the-badge&version=2">
   <a href="https://discord.com/users/714960683967447050"><img src="https://img.shields.io/static/v1?label=Discord&message=MsMmD&color=4402dd&style=for-the-badge&logo=discord&logoColor=white"></a>
-  <img src="https://img.shields.io/github/license/MSMMD/LocalPong?style=for-the-badge">
+  <img src="https://img.shields.io/github/license/MSMMD/LocalPong?style=for-the-badge&version=4">
 </div>
 <br>
 <h1 align="center">LocalPong</h1>
